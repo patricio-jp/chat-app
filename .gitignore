@@ -1,0 +1,13 @@
+# Carpetas comunes si más adelante usás herramientas
+node_modules/
+dist/
+build/
+
+# Archivos de sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Archivos temporales
+*.log
+*.tmp
