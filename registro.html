@@ -48,6 +48,20 @@
           </label>
           <input type="password" id="password" name="password" required class="w-full p-2 border rounded mb-2" placeholder="Ingresa tu contraseña">
         </div>
+
+        <div class="text-right mb-2">
+          <button type="button" id="open-modal" class="text-blue-600 text-sm hover:underline">
+            ¿Cómo crear una contraseña segura?
+          </button>
+        </div>
+
+        <!-- Medidor de fuerza -->
+        <div class="w-full mb-2">
+          <div class="h-2 bg-gray-300 rounded">
+            <div id="password-strength-bar" class="h-2 rounded w-0"></div>
+          </div>
+          <div id="password-strength-text" class="text-xs mt-1"></div>
+        </div>
       
         <!-- Confirmar Contraseña -->
         <div class="w-full">
@@ -88,6 +102,24 @@
     </div>
 
   </div>
+
+  <!-- Modal -->
+  <div id="password-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded shadow-lg w-80">
+      <h3 class="text-lg font-semibold mb-2">Cómo crear una contraseña segura</h3>
+      <ul class="list-disc list-inside mb-4 text-sm">
+        <li>Al menos 8 caracteres</li>
+        <li>Una letra mayúscula</li>
+        <li>Una letra minúscula</li>
+        <li>Un número</li>
+        <li>Un símbolo (por ej. !, @, #, $)</li>
+      </ul>
+      <button id="close-modal" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
 
   <script src="js/registro.js"></script>
 </body>

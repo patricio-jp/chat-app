@@ -1,23 +1,23 @@
 # 💬 Sala Chat
 
-Una aplicación web de chat simple desarrollada con HTML, JavaScript y TailwindCSS. Permite a los usuarios registrarse, iniciar sesión y enviar mensajes dentro de una sala de chat básica (sin backend, usando `localStorage`).
+Una aplicación web de chat simple desarrollada con HTML, JavaScript, TailwindCSS, y próximamente backend y base de datos. Actualmente permite a los usuarios registrarse, iniciar sesión y enviar mensajes dentro de una sala de chat local usando `localStorage`.
 
 ## 📁 Estructura del proyecto
 
 - `index.html` – Página de inicio
 - `login.html` – Inicio de sesión
 - `registro.html` – Registro de usuarios
-- `recuperacionEmail.html` – Simulación de recuperación de contraseña
+- `recuperacionEmail.html` – Recuperación de contraseña (simulada)
 - `chat.html` – Sala de chat principal
-- `login.js`, `registro.js`, `recuperacionEmail.js`, `chat.js` – Scripts funcionales
+- `js/` – Scripts funcionales (`login.js`, `registro.js`, `recuperacionEmail.js`, `chat.js`)
 - `README.md` – Descripción del proyecto
 
-## 🚀 Características
+## 🚀 Características actuales
 
 - Registro e inicio de sesión de usuario
 - Validación de credenciales simples
 - Chat local (solo en el navegador del usuario)
-- Recuperación de contraseña (simulada)
+- Recuperación de contraseña simulada
 - Interfaz moderna con TailwindCSS
 
 ## 🛠 Tecnologías utilizadas
@@ -25,7 +25,9 @@ Una aplicación web de chat simple desarrollada con HTML, JavaScript y TailwindC
 - HTML5
 - JavaScript
 - TailwindCSS (vía CDN)
-- `localStorage` para almacenamiento de usuarios y mensajes
+- `localStorage` (versión actual)
+- 🔜 Node.js (backend en desarrollo)
+- 🔜 Base de datos (MongoDB / PostgreSQL en desarrollo)
 
 ## 📝 Instrucciones de uso
 
@@ -36,19 +38,16 @@ Una aplicación web de chat simple desarrollada con HTML, JavaScript y TailwindC
 5. Accedé a la sala de chat
 6. ¡Listo! Podés chatear localmente en tu navegador
 
-## ⚠️ Limitaciones
+## ⚠️ Limitaciones actuales
 
-- No hay conexión entre usuarios reales (sin backend ni sockets)
-- Todo se guarda solo en `localStorage`, por lo que es local y temporal
+- Sin conexión entre usuarios reales (sin backend ni sockets todavía)
+- Todo se guarda solo en `localStorage` (local y temporal)
 
-## 📦 Futuras mejoras (ideas)
+## 📦 Futuras mejoras (en desarrollo)
 
-- Implementar backend con Node.js y WebSocket
-- Conexión en tiempo real
-- Base de datos para usuarios y mensajes
+- Backend con Node.js y WebSocket
+- Conexión en tiempo real entre usuarios
+- Base de datos para persistencia de usuarios y mensajes
+- Autenticación más segura con hashing (bcrypt / JWT)
 - Sistema de notificaciones
-- Autenticación más segura
-
-## 🧑 Autor
-
-- Proyecto realizado por Jao
+- Diseño responsivo avanzado
