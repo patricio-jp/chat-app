@@ -44,44 +44,6 @@ password.addEventListener('input', function() {
   strengthText.textContent = text;
 });
 
-
-const passwordErrorContainer = document.createElement('div');
-passwordErrorContainer.className = 'text-red-500 text-sm mb-2 hidden';
-passwordErrorContainer.id = 'password-error';
-password.parentNode.insertBefore(passwordErrorContainer, password.nextSibling);
-
-// Función para evaluar fuerza
-function evaluatePasswordStrength(pw) {
-  let score = 0;
-  if (pw.length >= 8) score++;
-  if (/[A-Z]/.test(pw)) score++;
-  if (/[a-z]/.test(pw)) score++;
-  if (/\d/.test(pw)) score++;
-  if (/[\W_]/.test(pw)) score++;
-  return score;
-}
-
-// Escuchar mientras escribe
-password.addEventListener('input', function() {
-  const pw = password.value;
-  const score = evaluatePasswordStrength(pw);
-  let width = (score / 5) * 100;
-  let color = 'bg-red-500';
-  let text = 'Débil';
-
-  if (score >= 4) {
-    color = 'bg-green-500';
-    text = 'Fuerte';
-  } else if (score >= 3) {
-    color = 'bg-yellow-500';
-    text = 'Media';
-  }
-
-  strengthBar.className = `h-2 rounded ${color}`;
-  strengthBar.style.width = `${width}%`;
-  strengthText.textContent = text;
-});
-
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -107,8 +69,7 @@ form.addEventListener('submit', function (e) {
 
   // Crear objeto con los datos
   const nuevoUsuario = {
-    nombre: document.getElementById('nombre').value,
-    email: document.getElementById('email').value,
+    username: document.getElementById('username').value,
     password: password.value
   };
 
