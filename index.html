@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <style>
+  @keyframes colorCycle {
+    0%   { color: #3b82f6; }   /* azul-500 */
+    25%  { color: #10b981; }   /* verde-500 */
+    50%  { color: #f59e0b; }   /* naranja-500 */
+    75%  { color: #ef4444; }   /* rojo-500 */
+    100% { color: #3b82f6; }   /* vuelve al azul */
+  }
+
+  .animate-color {
+    animation: colorCycle 4s infinite linear;
+  }
+</style>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bienvenido a ChatApp</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen text-center p-6">
+<body class="bg-slate-400 flex flex-col items-center justify-center min-h-screen text-center p-6">
 
   <!-- Contenedor principal -->
   <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
-    <h1 class="text-3xl font-bold text-blue-600 mb-4">
+    <h1 class="text-3xl font-bold text-blue-600 mb-4 animate-color select-none">
       ¡Bienvenido a ChatApp!
     </h1>
-    <p class="text-gray-700 mb-6">
+    <p class="text-gray-700 mb-6 select-none">
       Conectate con tus amigos en tiempo real. Registrate o iniciá sesión para comenzar.
     </p>
 
     <!-- Botones de acceso -->
     <div class="flex flex-col gap-4">
-      <a href="login.html" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded transition">
-        Iniciar sesión
+      <a href="login.html" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded active:scale-95 transition hover:scale-105">
+        Iniciar sesión 
       </a>
-      <a href="registro.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 rounded transition">
+      <a href="registro.html" class="bg-gray-300 hover:bg-gray-300 text-gray-800 font-semibold py-2 rounded active:scale-95 transition hover:scale-105">
         Registrarse
       </a>
     </div>

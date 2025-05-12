@@ -22,7 +22,7 @@ function checkRequirements(pw) {
   reqSymbol.textContent = (/[\W_]/.test(pw)) ? '✅ Un símbolo (por ej. !, @, #, $)' : '❌ Un símbolo (por ej. !, @, #, $)';
 }
 
-// Mostrar y ocultar lista
+// Mostrar y ocultar lista de requisitos
 password.addEventListener('focus', () => {
   requirementsBox.classList.remove('hidden');
 });
@@ -36,7 +36,7 @@ password.addEventListener('input', () => {
   checkRequirements(pw);
 });
 
-// Validar formulario
+// Validar y enviar formulario
 form.addEventListener('submit', function (e) {
   e.preventDefault();
   const pw = password.value;
@@ -58,18 +58,36 @@ form.addEventListener('submit', function (e) {
   if (pw !== confirmPassword.value) {
     errorMessage.classList.remove('hidden');
     return;
-  } else {
-    errorMessage.classList.add('hidden');
   }
 
+  errorMessage.classList.add('hidden');
   successMessage.classList.remove('hidden');
-  setTimeout(() => {
-    const usuario = {
-      nombre: document.getElementById('nombre').value,
-      email: document.getElementById('email').value,
-      password: pw
-    };
-    localStorage.setItem("usuarioRegistrado", JSON.stringify(usuario));
-    window.location.href = "login.html";
-  }, 2000);
+
+  const nuevoUsuario = {
+    username: document.getElementById('username').value,
+    password: pw
+  };
+
+  fetch("http://localhost:3000/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(nuevoUsuario)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error al registrar el usuario");
+      }
+      return response.json();
+    })
+    .then(data => {
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
+    })
+    .catch(error => {
+      successMessage.classList.add('hidden');
+      alert("Falló el registro: " + error.message);
+    });
 });
