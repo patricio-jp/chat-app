@@ -3,63 +3,59 @@ const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirm-password');
 const errorMessage = document.getElementById('error-message');
 const successMessage = document.getElementById('success-message');
+const passwordError = document.getElementById('password-error');
 
-const strengthBar = document.getElementById('password-strength-bar');
-const strengthText = document.getElementById('password-strength-text');
+// Requisitos de contraseña
+const requirementsBox = document.getElementById('password-requirements');
+const reqLength = document.getElementById('req-length');
+const reqUppercase = document.getElementById('req-uppercase');
+const reqLowercase = document.getElementById('req-lowercase');
+const reqNumber = document.getElementById('req-number');
+const reqSymbol = document.getElementById('req-symbol');
 
-const passwordErrorContainer = document.createElement('div');
-passwordErrorContainer.className = 'text-red-500 text-sm mb-2 hidden';
-passwordErrorContainer.id = 'password-error';
-password.parentNode.insertBefore(passwordErrorContainer, password.nextSibling);
-
-// Función para evaluar fuerza
-function evaluatePasswordStrength(pw) {
-  let score = 0;
-  if (pw.length >= 8) score++;
-  if (/[A-Z]/.test(pw)) score++;
-  if (/[a-z]/.test(pw)) score++;
-  if (/\d/.test(pw)) score++;
-  if (/[\W_]/.test(pw)) score++;
-  return score;
+// Evaluar requisitos
+function checkRequirements(pw) {
+  reqLength.textContent = (pw.length >= 8) ? '✅ Al menos 8 caracteres' : '❌ Al menos 8 caracteres';
+  reqUppercase.textContent = (/[A-Z]/.test(pw)) ? '✅ Una letra mayúscula' : '❌ Una letra mayúscula';
+  reqLowercase.textContent = (/[a-z]/.test(pw)) ? '✅ Una letra minúscula' : '❌ Una letra minúscula';
+  reqNumber.textContent = (/\d/.test(pw)) ? '✅ Un número' : '❌ Un número';
+  reqSymbol.textContent = (/[\W_]/.test(pw)) ? '✅ Un símbolo (por ej. !, @, #, $)' : '❌ Un símbolo (por ej. !, @, #, $)';
 }
 
-// Escuchar mientras escribe
-password.addEventListener('input', function() {
-  const pw = password.value;
-  const score = evaluatePasswordStrength(pw);
-  let width = (score / 5) * 100;
-  let color = 'bg-red-500';
-  let text = 'Débil';
-
-  if (score >= 4) {
-    color = 'bg-green-500';
-    text = 'Fuerte';
-  } else if (score >= 3) {
-    color = 'bg-yellow-500';
-    text = 'Media';
-  }
-
-  strengthBar.className = `h-2 rounded ${color}`;
-  strengthBar.style.width = `${width}%`;
-  strengthText.textContent = text;
+// Mostrar y ocultar lista de requisitos
+password.addEventListener('focus', () => {
+  requirementsBox.classList.remove('hidden');
 });
 
+password.addEventListener('blur', () => {
+  requirementsBox.classList.add('hidden');
+});
+
+password.addEventListener('input', () => {
+  const pw = password.value;
+  checkRequirements(pw);
+});
+
+// Validar y enviar formulario
 form.addEventListener('submit', function (e) {
   e.preventDefault();
+  const pw = password.value;
 
-  const passwordValue = password.value;
-  const score = evaluatePasswordStrength(passwordValue);
+  const valid = pw.length >= 8 &&
+                /[A-Z]/.test(pw) &&
+                /[a-z]/.test(pw) &&
+                /\d/.test(pw) &&
+                /[\W_]/.test(pw);
 
-  if (score < 4) {
-    passwordErrorContainer.textContent = 
-      'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.';
-    passwordErrorContainer.classList.remove('hidden');
+  if (!valid) {
+    passwordError.textContent = 'La contraseña no cumple con los requisitos.';
+    passwordError.classList.remove('hidden');
     return;
   } else {
-    passwordErrorContainer.classList.add('hidden');
+    passwordError.classList.add('hidden');
   }
 
-  if (passwordValue !== confirmPassword.value) {
+  if (pw !== confirmPassword.value) {
     errorMessage.classList.remove('hidden');
     return;
   }
@@ -67,13 +63,11 @@ form.addEventListener('submit', function (e) {
   errorMessage.classList.add('hidden');
   successMessage.classList.remove('hidden');
 
-  // Crear objeto con los datos
   const nuevoUsuario = {
     username: document.getElementById('username').value,
-    password: password.value
+    password: pw
   };
 
-  // Enviar al backend
   fetch("http://localhost:3000/api/auth/register", {
     method: "POST",
     headers: {
@@ -88,7 +82,6 @@ form.addEventListener('submit', function (e) {
       return response.json();
     })
     .then(data => {
-      // Redirigir después de 2 segundos
       setTimeout(() => {
         window.location.href = "login.html";
       }, 2000);
@@ -97,23 +90,4 @@ form.addEventListener('submit', function (e) {
       successMessage.classList.add('hidden');
       alert("Falló el registro: " + error.message);
     });
-});
-
-// Modal
-const openModalBtn = document.getElementById('open-modal');
-const closeModalBtn = document.getElementById('close-modal');
-const passwordModal = document.getElementById('password-modal');
-
-openModalBtn.addEventListener('click', () => {
-  passwordModal.classList.remove('hidden');
-});
-
-closeModalBtn.addEventListener('click', () => {
-  passwordModal.classList.add('hidden');
-});
-
-passwordModal.addEventListener('click', (e) => {
-  if (e.target === passwordModal) {
-    passwordModal.classList.add('hidden');
-  }
 });
