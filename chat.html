@@ -30,12 +30,16 @@
     <!-- Panel de mensajes -->
     <div class="w-3/4 p-4 flex flex-col">
       <!-- Área de mensajes -->
-      <div id="chat-messages" class="select-none flex-1 overflow-auto mb-4 bg-white p-4 rounded-xl shadow-lg"></div>
+      <div id="chat-messages" class="select-none flex-1 overflow-auto mb-4 bg-white p-4 rounded-xl shadow-lg">
+        <div class="w-full h-full flex justify-center items-center">
+          <p class="text-gray-700">Selecciona un chat para comenzar a chatear</p>
+        </div>
+      </div>
 
       <!-- Formulario para enviar mensaje -->
       <form id="chat-form" class="flex">
-        <input type="text" id="message-input" placeholder="Escriba un mensaje..." required class="flex-1 border border-gray-300 rounded-l px-3 py-2 focus:outline-none"/>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
+        <input type="text" id="message-input" disabled placeholder="Escriba un mensaje..." required class="flex-1 cursor-not-allowed border border-gray-300 rounded-l px-3 py-2 focus:outline-none"/>
+        <button id="submit-button" disabled type="submit" class="bg-blue-500 hover:bg-blue-600 text-white cursor-not-allowed px-4 py-2 rounded-r">
           Enviar
         </button>
       </form>
@@ -47,6 +51,18 @@
         Usuarios en línea
       </h3>
       <ul id="online-users" class="space-y-2">
+        <!-- Aquí se agregarán los usuarios -->
+      </ul>
+      <h3 class="select-none font-semibold text-xl my-4">
+        Chats recientes
+      </h3>
+      <ul id="user-chats" class="space-y-2">
+        <!-- Aquí se agregarán los usuarios -->
+      </ul>
+      <h3 class="select-none font-semibold text-xl my-4">
+        Usuarios
+      </h3>
+      <ul id="users" class="space-y-2">
         <!-- Aquí se agregarán los usuarios -->
       </ul>
     </div>

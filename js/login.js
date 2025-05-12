@@ -15,7 +15,7 @@ form.addEventListener('submit', event => {
   .then(data => {
     // Guarda el token que te envíe el backend
     localStorage.setItem("token", data.token);
-    localStorage.setItem("username", username);
+    localStorage.setItem("user", JSON.stringify(data.user));
     window.location.href = "chat.html";
   })
   .catch(err => alert(err.message));
