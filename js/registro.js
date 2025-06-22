@@ -68,7 +68,7 @@ form.addEventListener('submit', function (e) {
     password: pw
   };
 
-  fetch("http://jycapp.duckdns.org/chat-server/api/auth/register", {
+  fetch("https://jycapp.duckdns.org/chat-server/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

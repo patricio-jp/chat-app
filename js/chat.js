@@ -21,7 +21,7 @@ if (!tokenUsuario || !usuario) {
 const onlineUsersList = new Map();
 
 // Establecer conexión mediante socket.io
-const socket = io('ws://jycapp.duckdns.org', {
+const socket = io('wss://jycapp.duckdns.org', {
     path: "/chat-server/socket.io",
     auth: {
         token: tokenUsuario
@@ -88,7 +88,7 @@ logoutBtn.addEventListener("click", () => {
 
 // Mostrar la lista de usuarios en línea y permitir seleccionar para chatear
 async function obtenerUsuarios() {
-    fetch('http://jycapp.duckdns.org/chat-server/api/users', {
+    fetch('https://jycapp.duckdns.org/chat-server/api/users', {
         headers: {
             Authorization: `Bearer ${tokenUsuario}`,
         }
@@ -102,7 +102,7 @@ async function obtenerUsuarios() {
 }
 
 async function obtenerChatsDelUsuario() {
-    fetch('http://jycapp.duckdns.org/chat-server/api/chats', {
+    fetch('https://jycapp.duckdns.org/chat-server/api/chats', {
         headers: {
             Authorization: `Bearer ${tokenUsuario}`,
         }
@@ -211,7 +211,7 @@ function mostrarMensajesCon(receptor) {
     ); */
 
     let conversacion = [];
-    fetch(`http://jycapp.duckdns.org/chat-server/api/messages/${chatId}`, {
+    fetch(`https://jycapp.duckdns.org/chat-server/api/messages/${chatId}`, {
         headers: {
             Authorization: `Bearer ${tokenUsuario}`,
         }
